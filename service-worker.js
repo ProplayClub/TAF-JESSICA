@@ -1,4 +1,4 @@
-const CACHE = 'taf-jessica-v3-1511-gcm';
+const CACHE = 'taf-jessica-v4-1511-logo-final';
 const ASSETS = [
   './',
   './index.html',
