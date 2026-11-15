@@ -184,9 +184,51 @@ h1{margin:0 0 12px;font-size:1.55rem;line-height:1.05}
   .cardTop{padding-right:10px}
   .exerciseName{font-size:.94rem}
 }
+
+.splash{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(255,79,163,.20),transparent 34%),
+    linear-gradient(180deg,#050505,#0c0c0c);
+  transition:opacity .45s ease,visibility .45s ease;
+}
+.splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+.splashBox{text-align:center;padding:28px}
+.splashLogo{
+  width:170px;height:170px;object-fit:contain;
+  border-radius:28px;
+  box-shadow:0 0 0 2px rgba(255,193,223,.28),0 20px 60px rgba(0,0,0,.55);
+}
+.splashTitle{
+  margin-top:18px;font-size:1.55rem;font-weight:950;
+  color:#ffc1df;letter-spacing:.08em
+}
+.splashSub{
+  margin-top:7px;color:#f5f5f5;font-size:.78rem;
+  font-weight:800;letter-spacing:.12em;line-height:1.45
+}
+.heroHead{
+  display:flex;align-items:center;gap:13px
+}
+.heroLogo{
+  width:58px;height:58px;object-fit:contain;
+  border-radius:13px;flex:0 0 auto;
+  box-shadow:0 0 0 1px rgba(255,193,223,.28)
+}
+
 </style>
 </head>
 <body>
+
+<div class="splash" id="splash">
+  <div class="splashBox">
+    <img class="splashLogo" src="./icon-512.png" alt="Guarda Civil Municipal de Alvorada">
+    <div class="splashTitle">TAF — JÉSSICA</div>
+    <div class="splashSub">GUARDA CIVIL MUNICIPAL<br>ALVORADA / RS</div>
+  </div>
+</div>
+
 <div class="wrap">
   <div class="topbar"><div class="tabs" id="tabs"></div></div>
   <div id="app"></div>
@@ -208,7 +250,7 @@ const workouts={
   tab:'TREINO A',
   label:'TREINO A - PORTÃO',
   exercises:[
-   {id:'ja_graviton',name:'GRÁVITON SUPINADO',target:'4×4',load:'',unit:'KG',sets:[4,4,4,4],rest:180,note:'ASSISTÊNCIA: PREENCHER • INTERVALO: 3:00'},
+   {id:'ja_graviton',name:'GRÁVITON SUPINADO',target:'4×3',load:35,unit:'KG',sets:[3,3,3,3],rest:210,note:'35 KG DE ASSISTÊNCIA • INTERVALO: 3:30'},
    {id:'ja_puxada',name:'PUXADA FRONTAL SUPINADA',target:'3×8',load:40,unit:'KG',sets:[8,8,8],rest:150,note:'INTERVALO: 2:30'},
    {id:'ja_remada',name:'REMADA BAIXA COM TRIÂNGULO',target:'2×10',load:30,unit:'KG',sets:[10,10],rest:120,note:'INTERVALO: 2:00'},
    {id:'ja_rosca',name:'ROSCA CROSS COM BARRA — SUPINADA',target:'3×10',load:25,unit:'KG',sets:[10,10,10],rest:120,note:'INTERVALO: 2:00'}
@@ -250,7 +292,7 @@ const workouts={
   tab:'TREINO C',
   label:'TREINO C - PORTÃO',
   exercises:[
-   {id:'jc_graviton',name:'GRÁVITON SUPINADO',target:'3×6',load:'',unit:'KG',sets:[6,6,6],rest:180,note:'ASSISTÊNCIA: PREENCHER • DIA DE VOLUME • INTERVALO: 3:00'},
+   {id:'jc_graviton',name:'GRÁVITON SUPINADO',target:'4×4',load:40,unit:'KG',sets:[4,4,4,4],rest:180,note:'40 KG DE ASSISTÊNCIA • DIA DE VOLUME • INTERVALO: 3:00'},
    {id:'jc_puxada',name:'PUXADA FRONTAL SUPINADA',target:'3×8',load:40,unit:'KG',sets:[8,8,8],rest:150,note:'INTERVALO: 2:30'},
    {id:'jc_remada',name:'REMADA ARTICULADA PRONADA',target:'2×10',load:40,unit:'KG',sets:[10,10],rest:120,note:'INTERVALO: 2:00'},
    {id:'jc_martelo',name:'ROSCA MARTELO ALTERNADA',target:'2×8',load:10,unit:'KG',sets:[8,8],rest:120,note:'INTERVALO: 2:00'}
@@ -325,8 +367,13 @@ function render(){
  const app=document.getElementById('app');
  app.innerHTML=`
   <div class="hero">
-   <h1>${w.label}</h1>
-   <div class="subtitle">TAF — JÉSSICA</div>
+   <div class="heroHead">
+    <img class="heroLogo" src="./icon-192.png" alt="Guarda Civil Municipal de Alvorada">
+    <div>
+     <h1>${w.label}</h1>
+     <div class="subtitle">TAF — JÉSSICA • GUARDA DE ALVORADA</div>
+    </div>
+   </div>
    <div class="progress"><div class="bar" id="progressBar"></div></div>
    <div class="progressText" id="progressText">0% CONCLUÍDO</div>
   </div>
@@ -484,6 +531,13 @@ function toggleTimer(){
 
 render();
 renderTimer();
+
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('splash')?.classList.add('hide');
+  },1200);
+});
+
 </script>
 
 <script>

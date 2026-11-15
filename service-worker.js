@@ -1,4 +1,4 @@
-const CACHE = 'taf-jessica-v2-1511';
+const CACHE = 'taf-jessica-v3-1511-gcm';
 const ASSETS = [
   './',
   './index.html',
